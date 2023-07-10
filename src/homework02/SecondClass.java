@@ -1,4 +1,4 @@
-package hw_less_02;
+package homework02;
 
 public class SecondClass {
     public byte simpleByte;

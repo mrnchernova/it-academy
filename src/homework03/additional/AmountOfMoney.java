@@ -1,4 +1,4 @@
-package hw_less_03.additional;
+package homework03.additional;
 
 import java.util.Scanner;
 
