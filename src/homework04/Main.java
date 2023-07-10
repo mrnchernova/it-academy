@@ -1,6 +1,5 @@
-package hw_less_04;
+package homework04;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Random;
  */
 
 public class Main {
-    static Random random = new Random();
+    private static Random random = new Random();
 
     public static void main(String[] args) {
         Cat cat = new Cat();

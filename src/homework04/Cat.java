@@ -1,4 +1,4 @@
-package hw_less_04;
+package homework04;
 
 public class Cat {
     private String name = "Belyash";
