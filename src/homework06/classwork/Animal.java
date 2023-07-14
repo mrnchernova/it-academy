@@ -4,13 +4,9 @@ public abstract class Animal {
     private String food;
     private String location;
 
-    public void makeNoise() {
-        System.out.println("shhhhh");
-    }
+    public abstract void makeNoise();
 
-    public void eat() {
-        System.out.println("num-num");
-    }
+    public abstract void eat();
 
     public void sleep() {
         System.out.println("z-z-z-z-z-z-z-z");
