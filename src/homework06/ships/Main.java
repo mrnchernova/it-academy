@@ -23,23 +23,18 @@ public class Main {
     private static Random random = new Random();
 
     public static void main(String[] args) {
-        OneDeckShip sop = new OneDeckShip();
-        sop.chargeShip();
-        Container c = new Container();
+        OneDeckShip ods = new OneDeckShip();
+        Container container = new Container();
 
-        c.getContainerWeight("square", "big", 40, 2000);
 
-        System.out.println();
+        Port port = new Port();
+        int n = port.maxShips;
 
-        int randomShape = random.nextInt(c.shape.length);
-        int randomSize = random.nextInt(c.size.length);
-        int randomDensity = random.nextInt(c.density.length);
-        c.getContainerWeight(c.shape[randomShape], c.size[randomSize], (int) (Math.random() * 91) + 10, c.density[randomDensity]);
-        c.getContainerWeight(c.shape[randomShape], c.size[randomSize], (int) (Math.random() * 91) + 10, c.density[randomDensity]);
-        c.getContainerWeight(c.shape[randomShape], c.size[randomSize], (int) (Math.random() * 91) + 10, c.density[randomDensity]);
-        c.getContainerWeight(c.shape[randomShape], c.size[randomSize], (int) (Math.random() * 91) + 10, c.density[randomDensity]);
-
-//     for (int i=0; i<50;i++)
-//        System.out.println((int) (Math.random() * 91) + 10);
+        System.out.println("В порту " + n + " кораблей");
+        for (int i = 0; i < n; i++) {
+            ods.chargeShip();
+//            System.out.println(container.getContainerWeight(ods.chargeShip()));
+// что-то с этим надо делать
+        }
     }
 }

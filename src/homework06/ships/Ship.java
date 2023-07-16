@@ -2,7 +2,9 @@ package homework06.ships;
 
 public abstract class Ship {
     private String name;
-    
+
+    public abstract void getShip();
+
     public void chargeShip(){
         System.out.println("Common method for charging ship");
     }
