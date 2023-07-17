@@ -7,6 +7,7 @@ public class Run {
     public static DecimalFormat decimalFormat = new DecimalFormat("#.###");
     public static Random random = new Random();
 
+
     public void start() {
         OneDeckShip ods = new OneDeckShip();
         TwoDeckShip tds = new TwoDeckShip();
