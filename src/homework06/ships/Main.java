@@ -1,9 +1,5 @@
 package homework06.ships;
 
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.Random;
-
 /**
  * Построить иерархию.
  * 0.   Обязательные сущности (порт, корабль, палуба, контейнер)
@@ -20,21 +16,8 @@ import java.util.Random;
  * Для определения размера контейнера использовать флаг или писать сущности . У корабля должно быть имя. Удаление по имени.
  */
 public class Main {
-    private static Random random = new Random();
-
     public static void main(String[] args) {
-        OneDeckShip ods = new OneDeckShip();
-        Container container = new Container();
-
-
-        Port port = new Port();
-        int n = port.maxShips;
-
-        System.out.println("В порту " + n + " кораблей");
-        for (int i = 0; i < n; i++) {
-            ods.chargeShip();
-//            System.out.println(container.getContainerWeight(ods.chargeShip()));
-// что-то с этим надо делать
-        }
+        Run run = new Run();
+        run.start();
     }
 }

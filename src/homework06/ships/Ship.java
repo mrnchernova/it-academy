@@ -3,25 +3,21 @@ package homework06.ships;
 public abstract class Ship {
     private String name;
 
-    public abstract void getShip();
+    public abstract double chargeShip();
 
-    public void chargeShip(){
-        System.out.println("Common method for charging ship");
+    public void getShips(Container[] arrayContainer) {
+        for (Container x : arrayContainer) {
+            if (x != null) {
+                System.out.println(x);
+            }
+        }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Ship() {
     }
 
     public Ship(String name) {
         this.name = name;
-    }
-
-    public Ship() {
     }
 
     @Override
