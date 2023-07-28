@@ -6,10 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Garage {
-
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
-
     static Scanner sc = new Scanner(System.in);
     public static final String MAIN_MENU = "Выберите действие\n" +
             "1. Припарковать новую машину в гараж\n" +
@@ -35,9 +33,6 @@ public class Garage {
 
         printCarInGarage(garage);
 
-
-
-
         int action = -1;
         while (action != 0) {
             System.out.println(ANSI_YELLOW + MAIN_MENU + ANSI_RESET);
@@ -47,8 +42,6 @@ public class Garage {
                 System.out.println("Введите число");
                 sc.next();
             }
-
-
             switch (action) {
                 case 1:
                     parking(garage);
@@ -210,8 +203,7 @@ public class Garage {
         int randomNumber = (int) (Math.random() * listCar.size()); // [0..listCar.size()]
         if (listCar.size() != 0) {
             randomCarFromGarage = listCar.get(randomNumber);
-        }
-        else {
+        } else {
             System.out.println("Гараж пуст");
             sc.close();
             System.exit(0);
@@ -264,5 +256,4 @@ public class Garage {
         }
         return count;
     }
-
 }
