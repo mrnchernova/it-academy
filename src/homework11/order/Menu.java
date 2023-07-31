@@ -1,80 +1,64 @@
 package homework11.order;
 
-import java.io.*;
-import java.util.Date;
 import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Menu {
-    public static final String MENU = "1. Список товаров\n" +
-            "2. Добавить товар\n" +
-            "3. Удалить товар\n" +
-            "4. Список заказов\n" +
-            "5. Добавить заказ\n" +
-            "6. Удалить заказ\n" +
-            "0. Выход";
-    public static final String UNKNOWN_ITEM = "Неверный пункт";
-    static Scanner sc = new Scanner(System.in);
+    public static int lastProductId = 0;
+    public static int lastOrderId = 0;
 
     public static void menu() {
+        // Читает txt, переносит его в массив и передает последний id
+        lastProductId = FileService.initFile(Utils.fileProduct, Product.listOfProducts);
+        lastOrderId = FileService.initFile(Utils.fileOrder, Order.listOfOrders);
 
         int item = -1;
         while (item != 0) {
-            System.out.println(MENU);
+            System.out.println(Utils.MENU);
             try {
-                item = sc.nextInt();
+                item = Utils.sc.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println(UNKNOWN_ITEM);
-                sc.next();
+                System.out.println(Utils.UNKNOWN_ITEM);
+                Utils.sc.next();
             }
             switch (item) {
                 case 1:
-                    readFile(Main.fileProduct);
+                    FileService.readFile(Utils.fileProduct);
                     break;
                 case 2:
-                    writeFile(Main.fileProduct);
+                    Product.addProduct();                                                   // добавляется новый продукт
+                    FileService.writeToFile(Utils.fileProduct, Product.listOfProducts);     // перезаписывается файл txt
                     break;
                 case 3:
-                    Product.removeProduct(Main.fileProduct, sc.nextInt());
+                    System.out.println(Utils.ENTER_PRODUCT_ID);
+                    Product.removeProduct(checkId());                                       // удаляется продукт
+                    FileService.writeToFile(Utils.fileProduct, Product.listOfProducts);     // из массива записывается все в txt
+                    break;
+                case 4:
+                    FileService.readFile(Utils.fileOrder);
+                    break;
+                case 5:
+                    Order.addOrder();                                               // добавляется новый продукт
+                    FileService.writeToFile(Utils.fileOrder, Order.listOfOrders);   // перезаписывается файл txt
+                    break;
+                case 6:
+                    System.out.println(Utils.ENTER_ORDER_ID);
+                    Order.removeOrder(checkId());                                   // удаляется продукт
+                    FileService.writeToFile(Utils.fileOrder, Order.listOfOrders);   // из массива записывается все в txt
                     break;
                 case 0:
-                    sc.close();
+                    Utils.sc.close();
                     System.exit(0);
                 default:
-                    System.out.println(UNKNOWN_ITEM);
+                    System.out.println(Utils.UNKNOWN_ITEM);
                     break;
             }
         }
-
-
     }
-
-    public static void readFile(File file) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String str = reader.lines().collect(Collectors.joining("\n"));
-            System.out.println(str);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static int checkId(){
+        while (!Utils.sc.hasNextInt()){
+            System.out.println(Utils.UNKNOWN_ITEM);
+            Utils.sc.next();
         }
-        System.out.println("---");
+       return Utils.sc.nextInt();
     }
-
-    public static void writeFile(File file){
-        Product.addProduct(file);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            // todo: for(T smth: T.listOfSmth){writer.append(smth.toString());}
-            for (Product product: Product.listOfProducts) {
-                writer.append(product.toString());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public static void removeItem(File file){
-        
-    }
-    
 }

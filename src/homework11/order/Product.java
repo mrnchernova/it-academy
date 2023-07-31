@@ -1,94 +1,46 @@
 package homework11.order;
 
-import java.io.*;
-import java.nio.file.StandardOpenOption;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Product {
-
-    private static int counter = Main.lastId;
-
     private int productId;
     private String product;
     private Date dateOfManufacture;
 
-
+    private static int counter = Menu.lastProductId;
     static List<Product> listOfProducts = new ArrayList<>();
 
-    public static void addProduct(File file) {
-        listOfProducts.add(new Product("product" + Main.rand.nextInt(100),
-                new Date(120, Main.rand.nextInt(13) + 1, Main.rand.nextInt(32) + 1)));
+    public static void addProduct() {
+        listOfProducts.add(new Product("product" + Utils.rand.nextInt(100),
+                new Date(120, Utils.rand.nextInt(13) + 1, Utils.rand.nextInt(32) + 1)));
     }
 
-    public static void removeProduct(File file, int id) {
+    public static void removeProduct(int id) {
+        boolean isRemoved = false;
         for (int i = 0; i < listOfProducts.size(); i++) {
             if (listOfProducts.get(i).productId == id) {
                 listOfProducts.remove(i);
-                System.out.println("removed");
+                System.out.printf(Utils.PRODUCT_REMOVED_BY_ID, id);
+                isRemoved = true;
             }
         }
-      
+        if (!isRemoved) {
+            System.out.printf(Utils.UNKNOWN_PRODUCT_BY_ID, id);
+        }
         for (Product p : listOfProducts) {
-            System.out.println("=" + p);
+            System.out.println(p);
         }
-
-        clearFile(file);
-//        initFile(file); // не подходит. Он берет из файла и добавляет в лист
-//        addProduct(file); // тоже не подходит. он добавляет новый Продукт
-        Menu.writeFile(file);
+        System.out.println();
     }
-
-    public static void clearFile(File file) {
-        try {
-            PrintWriter pw = new PrintWriter(file);
-            pw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public static int initFile(File file) {
-        int id = 0;
-        // если файл не пустой, то парсить
-        if (file.length() != 0L) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String str;
-                while ((str = reader.readLine()) != null) {
-
-                    String[] productItem = str.split("\\|");
-                    id = Integer.parseInt(productItem[0].trim());
-                    productItem[1] = productItem[1].trim();
-
-                    SimpleDateFormat format = new SimpleDateFormat();
-                    format.applyPattern("dd.MM.yyyy");
-
-                    try {
-                        Date date = format.parse(productItem[2].trim());
-                        listOfProducts.add(new Product(id, productItem[1], date));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return id;
-    }
-
 
     public Product() {
     }
 
     public Product(String product, Date dateOfManufacture) {
-//        this.productId = ++counter;
-        this.productId = ++Main.lastId;
+        this.productId = ++Menu.lastProductId;
         this.product = product;
         this.dateOfManufacture = dateOfManufacture;
     }
@@ -99,11 +51,11 @@ public class Product {
         this.dateOfManufacture = dateOfManufacture;
     }
 
-    public int getProductId() {
+    public int getId() {
         return productId++;
     }
 
-    public void setProductId(int productId) {
+    public void setId(int productId) {
         this.productId = productId;
     }
 
@@ -138,7 +90,7 @@ public class Product {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        return productId + " | " + product + " | " + sdf.format(dateOfManufacture);
+
+        return productId + " | " + product + " | " + Utils.simpleDateFormat.format(dateOfManufacture);
     }
 }
