@@ -33,10 +33,10 @@ public class Menu {
                     readFile(Main.fileProduct);
                     break;
                 case 2:
-                    //todo: look notes
                     writeFile(Main.fileProduct);
                     break;
                 case 3:
+                    Product.removeProduct(Main.fileProduct, sc.nextInt());
                     break;
                 case 0:
                     sc.close();
@@ -60,7 +60,7 @@ public class Menu {
         System.out.println("---");
     }
 
-    public static  void writeFile(File file){
+    public static void writeFile(File file){
         Product.addProduct(file);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             // todo: for(T smth: T.listOfSmth){writer.append(smth.toString());}
@@ -72,4 +72,9 @@ public class Menu {
             e.printStackTrace();
         }
     }
+    
+    public static void removeItem(File file){
+        
+    }
+    
 }

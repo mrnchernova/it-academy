@@ -1,9 +1,7 @@
 package homework11.order;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +25,35 @@ public class Product {
                 new Date(120, Main.rand.nextInt(13) + 1, Main.rand.nextInt(32) + 1)));
     }
 
-    public static int initProduct(File file) {
+    public static void removeProduct(File file, int id) {
+        for (int i = 0; i < listOfProducts.size(); i++) {
+            if (listOfProducts.get(i).productId == id) {
+                listOfProducts.remove(i);
+                System.out.println("removed");
+            }
+        }
+      
+        for (Product p : listOfProducts) {
+            System.out.println("=" + p);
+        }
+
+        clearFile(file);
+//        initFile(file); // не подходит. Он берет из файла и добавляет в лист
+//        addProduct(file); // тоже не подходит. он добавляет новый Продукт
+        Menu.writeFile(file);
+    }
+
+    public static void clearFile(File file) {
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static int initFile(File file) {
         int id = 0;
         // если файл не пустой, то парсить
         if (file.length() != 0L) {

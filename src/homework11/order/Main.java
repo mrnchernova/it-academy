@@ -2,12 +2,7 @@ package homework11.order;
 
 import java.io.*;
 import java.nio.file.Path;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * 1. В программе должно быть  две сущности Заказ и Товар.
@@ -37,7 +32,10 @@ public class Main {
     public static Random rand = new Random();
     public static int lastId = 0;
     public static void main(String[] args) {
-        lastId = Product.initProduct(fileProduct);
+        
+        // Читает product.txt, переносит его в ArrayList и запоминает последний id
+        lastId = Product.initFile(fileProduct);
+        
         Menu.menu();
     }
 }
