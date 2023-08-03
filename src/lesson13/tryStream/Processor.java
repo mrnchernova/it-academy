@@ -1,5 +1,7 @@
 package lesson13.tryStream;
 
+import java.util.Objects;
+
 public class Processor {
     private String title;
     private double cpu;
@@ -31,5 +33,18 @@ public class Processor {
     }
 
     public Processor() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Processor)) return false;
+        Processor processor = (Processor) o;
+        return Double.compare(processor.cpu, cpu) == 0 && Objects.equals(title, processor.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, cpu);
     }
 }
