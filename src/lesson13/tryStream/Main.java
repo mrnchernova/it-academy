@@ -1,7 +1,9 @@
 package lesson13.tryStream;
 
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,10 +14,10 @@ public class Main {
         processors.add(new Processor("Intel Core i5", 2.6));
         processors.add(new Processor("Intel Core i7", 3.6));
         processors.add(new Processor("Intel Core i9", 4.5));
-        processors.add(new Processor("Intel Ryzen 3", 3.6));
-        processors.add(new Processor("Intel Ryzen 5", 3.9));
-        processors.add(new Processor("Intel Ryzen 7", 3.8));
-        processors.add(new Processor("Intel Ryzen 9", 4.7));
+        processors.add(new Processor("AMD Ryzen 3", 3.6));
+        processors.add(new Processor("AMD Ryzen 5", 3.9));
+        processors.add(new Processor("AMD Ryzen 7", 3.8));
+        processors.add(new Processor("AMD Ryzen 9", 4.7));
         processors.add(new Processor("Intel Pentium", 3.7));
         processors.add(new Processor("Intel Celeron", 3.5));
         processors.add(new Processor("Intel Celeron", 3.5));
@@ -66,16 +68,23 @@ public class Main {
 //                .forEach(System.out::println);
 
 
-        System.out.println(".flatMap");
+//        System.out.println("\n.distinct (without dublicate 'Intel Celeron 3.5')");
+//        processors.stream()
+//                .distinct()
+//                .forEach(System.out::println);
 
-//        System.out.println(".mapToInt");
-//        System.out.println(".mapToLong");
-//        System.out.println(".mapToDouble");
-//        System.out.println(".flatMapToInt");
-//        System.out.println(".flatMapToLong");
-//        System.out.println(".flatMapToDouble");
-//        System.out.println(".distinct");
-//        System.out.println(".peek");
+
+//        System.out.println("\n.map (super speed +10)");
+//        processors.stream()
+//                .map(p -> {
+//                    return new Processor(
+//                            "Super " + p.getTitle(),
+//                            p.getCpu() + 10);
+//                })
+//                .forEach(System.out::println);
+
+
+
 //        System.out.println(".limit");
 //        System.out.println(".skip");
 //        System.out.println(".takeWhile");
@@ -97,14 +106,38 @@ public class Main {
 //        System.out.println(".ofNullable");
 //        System.out.println(".iterate");
 
-//        https://javarush.com/groups/posts/3796-kofe-breyk-108-12-rasprostranennihkh-sposobov-ispoljhzovanija-java-streams-kak-ocenitjh-vihdele
+        /**
+         System.out.println(".peek");
+         processors.stream()
+         .peek(System.out::println)
+         .distinct()
+         .forEach(System.out::println);
+         */
+        
+        /**
+         System.out.println(".flatMap");
+         List<Integer> list1 = new ArrayList<>();
+         list1.add(1);
+         list1.add(2);
 
-/*
-        List<Processor> proc = processors.stream()
-                .filter((p) -> p.getCpu() >= 4)
-                .collect(Collectors.toList());
-        proc.forEach(e -> System.out.println(e));
-*/
+         List<String> list2 = new ArrayList<>();
+         list2.add("300");
+         list2.add("400");
 
+         List<Integer> intlist = list2.stream()
+         .flatMapToInt(l -> IntStream.of(Integer.parseInt(l)))
+         .collect(Collectors.toList());
+
+         Arrays.asList(list1, intlist).stream()
+         .flatMap(l -> l.stream())
+         .forEach(System.out::println);
+         */
+
+//        System.out.println(".mapToInt");
+//        System.out.println(".mapToLong");
+//        System.out.println(".mapToDouble");
+//        System.out.println(".flatMapToInt");
+//        System.out.println(".flatMapToLong");
+//        System.out.println(".flatMapToDouble");
     }
 }
