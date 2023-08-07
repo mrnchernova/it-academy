@@ -1,4 +1,4 @@
-package lesson13.tryStream;
+package streams;
 
 import java.util.Objects;
 

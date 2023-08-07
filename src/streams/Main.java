@@ -1,9 +1,6 @@
-package lesson13.tryStream;
+package streams;
 
-import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,7 +21,7 @@ public class Main {
 
         System.out.println(".forEach");
         processors.stream()
-                .forEach(System.out::println);// для каждого элемента коллекции процесс нужно вызвать метод принтлн
+                .forEach(System.out::println);
 
 
 //        System.out.println("\n.filter (CPU >= 4)");
@@ -74,70 +71,12 @@ public class Main {
 //                .forEach(System.out::println);
 
 
-//        System.out.println("\n.map (super speed +10)");
+//        System.out.println(".peek");
 //        processors.stream()
-//                .map(p -> {
-//                    return new Processor(
-//                            "Super " + p.getTitle(),
-//                            p.getCpu() + 10);
-//                })
-//                .forEach(System.out::println);
+//                .distinct()
+//                .limit(4)
+//                .peek(System.out::println)
+//                .count();
 
-
-
-//        System.out.println(".limit");
-//        System.out.println(".skip");
-//        System.out.println(".takeWhile");
-//        System.out.println(".dropWhile");
-//        System.out.println(".forEachOrdered");
-//        System.out.println(".toArray");
-//        System.out.println(".reduce");
-//        System.out.println(".min");
-//        System.out.println(".max");
-//        System.out.println(".count");
-//        System.out.println(".anyMatch");
-//        System.out.println(".allMatch");
-//        System.out.println(".noneMatch");
-//        System.out.println(".findFirst");
-//        System.out.println(".findAny");
-//        System.out.println(".builder");
-//        System.out.println(".empty");
-//        System.out.println(".of");
-//        System.out.println(".ofNullable");
-//        System.out.println(".iterate");
-
-        /**
-         System.out.println(".peek");
-         processors.stream()
-         .peek(System.out::println)
-         .distinct()
-         .forEach(System.out::println);
-         */
-        
-        /**
-         System.out.println(".flatMap");
-         List<Integer> list1 = new ArrayList<>();
-         list1.add(1);
-         list1.add(2);
-
-         List<String> list2 = new ArrayList<>();
-         list2.add("300");
-         list2.add("400");
-
-         List<Integer> intlist = list2.stream()
-         .flatMapToInt(l -> IntStream.of(Integer.parseInt(l)))
-         .collect(Collectors.toList());
-
-         Arrays.asList(list1, intlist).stream()
-         .flatMap(l -> l.stream())
-         .forEach(System.out::println);
-         */
-
-//        System.out.println(".mapToInt");
-//        System.out.println(".mapToLong");
-//        System.out.println(".mapToDouble");
-//        System.out.println(".flatMapToInt");
-//        System.out.println(".flatMapToLong");
-//        System.out.println(".flatMapToDouble");
     }
 }
